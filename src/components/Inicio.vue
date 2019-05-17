@@ -39,6 +39,9 @@ export default {
     }
       ]
     }
+  },
+  mounted: function () {
+    //console.log('estado de session ' + this.$session.exists())
   }
 }
 </script>
