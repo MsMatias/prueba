@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- Enrutador -->
     <router-view></router-view>
   </div>
 </template>
@@ -11,24 +12,16 @@ export default {
   },
   data() {
     return {
-      showNav: false,
-      items: [
-        {
-          icon: 'home',
-          title: 'Inicio',
-          href: '/'
-        },
-        {
-          icon: 'logout',
-          title: 'Salir',
-          href: 'contacto'
-        }
-      ]
     }
   },
   methods: {
     redirectTo (url) {
       this.$router.push(url)
+    }
+  },
+  beforeCreate: function () {
+    if(!this.$session.exists()) {
+      this.$router.replace('/login')
     }
   }
 }

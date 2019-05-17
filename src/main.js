@@ -10,6 +10,7 @@ import colors from 'vuetify/es5/util/colors'
 import Inicio from '@/components/Inicio'
 import Contacto from '@/components/Contacto'
 import Login from '@/views/Login'
+import LogOut from '@/views/LogOut'
 
 //Importar LayOut
 import LayOut from '@/layout/LayOut'
@@ -63,6 +64,13 @@ const routes = [
       login: false
     },
     component: Login
+  },
+  {
+    path: '/logout',
+    meta: {
+      login: true
+    },
+    component: LogOut
   }
 ]
 

@@ -26,7 +26,7 @@
   <v-list-tile
     v-for="item in items"
     :key="item.title"
-    @click="ir(item.href)"
+    @click="redirectTo(item.href)"
     >
     <v-list-tile-action>
       <v-icon>{{ item.icon }}</v-icon>
@@ -40,6 +40,7 @@
 </v-navigation-drawer>
 <v-container>
   <v-layout row wrap align-center justify-center>
+    <!-- el enturador -->
     <router-view></router-view>
   </v-layout>
 </v-container>
@@ -54,6 +55,28 @@
 export default {
   name: 'LayOut',
   components: {
+  },
+  data() {
+    return {
+      showNav: false,
+      items: [
+        {
+          icon: 'home',
+          title: 'Inicio',
+          href: '/inicio'
+        },
+        {
+          icon: 'logout',
+          title: 'Salir',
+          href: 'logout'
+        }
+      ]
+    }
+  },
+  methods: {
+    redirectTo (url) {
+      this.$router.push(url)
+    }
   }
 }
 </script>
