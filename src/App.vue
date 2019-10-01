@@ -1,7 +1,39 @@
 <template>
   <div id="app">
-    <!-- Enrutador -->
-    <router-view></router-view>
+    <v-toolbar>
+      <v-toolbar-side-icon v-on:click="showNav = !showNav"></v-toolbar-side-icon>
+      <v-toolbar-title>Title</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn href="#/" icon><v-icon>home</v-icon></v-btn>
+        <v-btn href="#/contacto" icon><v-icon>contact_support</v-icon></v-btn>
+        <v-btn v-if="login" @click="logoutGoogle" icon><v-icon>logout</v-icon></v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+    <v-navigation-drawer v-if="showNav">
+    <v-toolbar flat>
+      <v-list>
+        <v-list-tile>
+          <v-list-tile-title class="title">
+            Application
+          </v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-toolbar>
+
+    <v-divider></v-divider>
+
+    
+  </v-navigation-drawer>
+    <v-container>
+      <v-layout row wrap>
+        <router-view></router-view>
+      </v-layout>
+    </v-container>
+    <v-footer class="pa-3">
+    <v-spacer></v-spacer>
+    <div>Echo por alguien &copy; {{ new Date().getFullYear() }}</div>
+  </v-footer>
   </div>
 </template>
 
@@ -12,16 +44,34 @@ export default {
   },
   data() {
     return {
+      showNav: false,
+      items: [
+        {
+          icon: 'home',
+          title: 'Inicio',
+          href: '/'
+        },
+        {
+          icon: 'logout',
+          title: 'Salir',
+          href: 'contacto'
+        }
+      ]
+    }
+  },
+  computed: {
+    login () {
+      return this.$store.getters['auth/getLogin']
     }
   },
   methods: {
-    redirectTo (url) {
-      this.$router.push(url)
-    }
-  },
-  beforeCreate: function () {
-    if(!this.$session.exists()) {
-      this.$router.replace('/login')
+    ir (href) {
+      this.$router.replace(href)
+    },
+    logoutGoogle () {
+      this.$store.dispatch('auth/logout').then(result => {
+        this.$router.replace('/')
+      })
     }
   }
 }
