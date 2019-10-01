@@ -38,13 +38,7 @@ const routes = [
 ]
 
 var firebaseConfig = {
-  apiKey: "AIzaSyBpAGba-YMkkR5GfU0HZJthcb_cu9m74Ew",
-  authDomain: "tesis-2611d.firebaseapp.com",
-  databaseURL: "https://tesis-2611d.firebaseio.com",
-  projectId: "tesis-2611d",
-  storageBucket: "tesis-2611d.appspot.com",
-  messagingSenderId: "66985171595",
-  appId: "1:66985171595:web:a57852cb942cb226"
+
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
