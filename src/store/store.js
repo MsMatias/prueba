@@ -2,6 +2,7 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 import VuexPersist from 'vuex-persist'
 
+import noticias from './modules/noticias.js'
 import auth from './modules/auth.js'
 
 Vue.use(Vuex)
@@ -14,6 +15,7 @@ const vuexPersist = new VuexPersist({
 export const store = new Vuex.Store({
     plugins: [vuexPersist.plugin],
     modules: {
-        auth
+        auth,
+        noticias
     }
 })
