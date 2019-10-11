@@ -1,5 +1,8 @@
 <template>
   <v-btn @click="LoginGoogle">Login con google</v-btn>
+  <div>
+    {{ gastos }}
+  </div>
 </template>
 
 <script>
@@ -19,10 +22,16 @@ export default {
     }
   },
   created () {
+    this.$store.dispatch('gastos/listar', usuario)
     this.$store.dispatch('auth/verify').then(result => {
       this.$router.replace('/contacto')
       console.log(result)
     })
+  },
+  computed: {
+    gastos () {
+      return this.$store.getters['gastos/verGastos']
+    }
   },
   methods: {
     LoginGoogle() {
