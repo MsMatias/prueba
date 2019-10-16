@@ -51,6 +51,19 @@ const actions = {
                   var token = result.credential.accessToken;
                   // The signed-in user info.
                   var user = result.user;
+                  let dato = null
+                  firebase.firestore().collection('usuarios').where('uid', '==', result.user.uid).get().then(function(snapshot) {
+                      snapshot.forEach(function(childSnapshot) {
+                          dato = childSnapshot.data()
+                      })
+                      if(dato == null) {
+                          firebase.firestore().colection('usuarios').add({
+                              uid: result.user.uid,
+                              telefono: null,
+                              nivel: 1
+                          })
+                      }
+                  })
                   commit('setUser', user)
                   commit('setToken', token)
                   commit('setLogin', true)                  
